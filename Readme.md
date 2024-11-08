@@ -2,6 +2,9 @@
 
 This project provides tools for extracting information from web searches and Google Sheets using AI models.
 
+![Page1](src/images/1.png)
+![Page2](src/images/2.png)
+
 ## Setup
 
 1. **Clone the repository:**
@@ -32,26 +35,27 @@ This project provides tools for extracting information from web searches and Goo
 
 1. **Upload a CSV file:**
     - Click on "Choose a CSV file" and select your CSV file.
+    ![Upload CSV](src/images/upload_csv.png)
 
 2. **Provide a Google Sheets URL:**
     - Enter the Google Sheets URL in the provided text input.
+    ![Google Sheets URL](src/images/google_sheets_url.png)
 
 ### Information Extraction
 
 1. **Enter the base prompt:**
     - Provide a base prompt for generating queries.
+    ![Enter Prompt](src/images/enter_prompt.png)
 
 2. **Select the column:**
     - Choose the column from which you want to extract information.
+    ![Select Column](src/images/select_column.png)
 
 3. **Extract Information:**
     - Click on "Extract Information" to start the extraction process.
+    ![Extract Information](src/images/extract_information.png)
 
-### Example
-
-1. **Upload a CSV file or provide a Google Sheets URL.**
-2. **Enter a prompt like "Summarize the content of" and select the desired column.**
-3. **Click "Extract Information" to see the results.**
+**Note:** We can only extract data up to 100 rows from the input sheet after removing duplicates.
 
 ## Files
 
@@ -60,10 +64,6 @@ This project provides tools for extracting information from web searches and Goo
 - `infoExtraction.py`: Functions for extracting information using AI models.
 - `infoExtractionOfAll.py`: Functions for extracting information from all rows in a DataFrame.
 - `webSearch.py`: Functions for performing web searches and retrieving data.
-
-## License
-
-This project is licensed under the MIT License.
 
 ## AI Model
 
@@ -74,9 +74,21 @@ This project uses the Generative AI model "gemini-1.5-flash" from Google for inf
 - **Python**: Programming language used for the project.
 - **Streamlit**: Framework for building interactive web applications.
 - **Pandas**: Library for data manipulation and analysis.
-- **Requests**: Library for making HTTP requests.
 - **Selenium**: Tool for web scraping.
-- **DuckDuckGo Search**: API for performing web searches.
+- **Google Search**: API for performing web searches.
 - **LangChain**: Library for working with language models.
 - **Google Generative AI**: AI model used for information extraction.
 - **dotenv**: Library for loading environment variables from a `.env` file.
+
+## Input CSV file
+
+The CSV file used in this Demo can be found [here](https://docs.google.com/spreadsheets/d/1GSbjXCk2y1vE_YhpmV6RF21DHOLqaJf3DHYjhsOCYD8/edit?gid=0#gid=0).
+
+## Output 
+
+[Output after extraction of required data](2024-11-08T16-19_export.csv)
+
+## License
+
+This project is licensed under the MIT License.
+

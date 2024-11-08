@@ -5,6 +5,7 @@ import os
 import google.generativeai as genai
 from loadData import Load_DataFrame
 from infoExtractionOfAll import info_extract_all
+import asyncio
 
 # Load environment variables
 load_dotenv()
@@ -12,7 +13,7 @@ load_dotenv()
 # Configure Generative AI model
 def configure_genai():
     api_key = os.getenv('GOOGLE_API_KEY')
-    if api_key:
+    if (api_key):
         genai.configure(api_key=api_key)
         return genai.GenerativeModel("gemini-1.5-flash")
     else:
@@ -35,7 +36,8 @@ def info_extract(df, model):
         if extract_button:
             if prompt and column:
                 if model:
-                    results_df = info_extract_all(prompt, df.head(), column, model)
+                    # Run the asynchronous extraction within a synchronous context
+                    results_df = asyncio.run(info_extract_all(prompt, df.head(100), column, model))
                     st.dataframe(results_df)
                 else:
                     st.warning("Generative AI model configuration failed due to missing API key.")

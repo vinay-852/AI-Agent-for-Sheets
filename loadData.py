@@ -1,8 +1,6 @@
 import re
 import pandas as pd
 
-url = "https://docs.google.com/spreadsheets/d/1GSbjXCk2y1vE_YhpmV6RF21DHOLqaJf3DHYjhsOCYD8/edit?usp=sharing"
-
 def get_Key(url: str) -> str:
     """
     Extracts the key from a Google Sheets URL.

@@ -1,8 +1,9 @@
 import json
 import pandas as pd
+import asyncio
 from webSearch import get_data_without_proxies
 
-def info_extraction(prompt, model):
+async def info_extraction(prompt, model):
     """
     Extract information based on the given prompt and model.
     
@@ -13,7 +14,7 @@ def info_extraction(prompt, model):
     Returns:
         pd.DataFrame: DataFrame containing the results JSON and the generated response.
     """
-    result_json = get_data_without_proxies(prompt)
+    result_json = await get_data_without_proxies(prompt)
     
     if isinstance(result_json, str):
         result_json = json.loads(result_json)

@@ -1,54 +1,46 @@
-import requests
-from duckduckgo_search import DDGS
-from langchain_community.document_loaders import SeleniumURLLoader
 import json
-import time
-import random
+import asyncio
+from langchain_community.document_loaders import SeleniumURLLoader
+from googlesearch import search as google_search
 
-def perform_duckduckgo_search(prompt: str, max_results: int = 2):
+async def fetch_page_content(url):
     """
-    Perform a search on DuckDuckGo and return the top results.
+    Fetch page content using Selenium.
     
     Args:
-        prompt (str): The search query.
-        max_results (int): The maximum number of results to return.
+        url (str): URL of the page to load.
 
     Returns:
-        list: A list of URLs for the top search results.
+        str: Content of the page.
     """
-    results = DDGS().text(prompt, max_results=max_results)
-    return [result['href'] for result in results[:max_results]]
+    try:
+        loader = SeleniumURLLoader(urls=[url], headless=True)
+        result = loader.load()
+        return result[0].page_content if result else ""
+    except Exception as e:
+        print(f"Failed to load URL {url}: {e}")
+        return ""
 
-def get_data_without_proxies(prompt: str, max_results: int = 2):
+async def get_data_without_proxies(prompt: str, max_results: int = 3):
     """
     Get data from the web without using proxies.
 
     Args:
         prompt (str): The search query.
         max_results (int): The maximum number of results to return.
-    
+
     Returns:
         str: The JSON response containing the prompt and data content.
     """
-    top_links = perform_duckduckgo_search(prompt, max_results)
+    # Fetch top links from Google search
+    google_links = list(google_search(prompt, num_results=max_results, sleep_interval=0.5))
     data_content = ""
 
-    for url in top_links:
-        retries = 5
-        for i in range(retries):
-            try:
-                loader = SeleniumURLLoader(urls=[url])
-                result = loader.load()
-                if result:
-                    data_content += result[0].page_content
-                break
-            except requests.exceptions.RequestException as e:
-                if i < retries - 1:
-                    wait_time = (2 ** i) + random.uniform(0, 1)
-                    print(f"Rate limit hit. Retrying in {wait_time:.2f} seconds...")
-                    time.sleep(wait_time)
-                else:
-                    print("Max retries reached. Exiting.")
-                    raise e
+    # Use asynchronous loading to speed up content retrieval
+    tasks = [fetch_page_content(url) for url in google_links]
+    contents = await asyncio.gather(*tasks)
+
+    for content in contents:
+        data_content += content
 
     return json.dumps({'prompt': prompt, 'data': data_content})

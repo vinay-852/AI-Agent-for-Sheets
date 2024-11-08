@@ -1,7 +1,8 @@
 import pandas as pd
+import asyncio
 from infoExtraction import info_extraction
 
-def info_extract_all(prompt, df, column, model):
+async def info_extract_all(prompt, df, column, model):
     """
     Extract information from a DataFrame column using a specified model.
     
@@ -13,10 +14,17 @@ def info_extract_all(prompt, df, column, model):
     Returns:
         pd.DataFrame: DataFrame containing the row and the generated response.
     """
-    results_df = pd.DataFrame(columns=[column, 'Response'])
+    tasks = []
     for i, row in enumerate(df[column]):
         prompt_model = f"{prompt} {row}"
-        result_df1 = info_extraction(prompt_model, model)
-        result_df1[column] = row  # Add the row data to the result DataFrame
-        results_df = pd.concat([results_df, result_df1], ignore_index=True)
+        tasks.append(info_extraction(prompt_model, model))
+    
+    results = await asyncio.gather(*tasks)
+    
+    # Include the row data in the results DataFrame
+    results_df = pd.DataFrame({
+        column: df[column],
+        'Response': [result['Response'][0] for result in results]
+    })
+    
     return results_df
