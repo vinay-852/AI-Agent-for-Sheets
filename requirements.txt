@@ -6,3 +6,6 @@ requests
 duckduckgo-search
 langchain-community
 selenium
+googlesearch-python
+unstructured
+tqdm

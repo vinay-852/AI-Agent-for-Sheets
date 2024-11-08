@@ -12,6 +12,12 @@ load_dotenv()
 
 # Configure Generative AI model
 def configure_genai():
+    """
+    Configure the Generative AI model using the API key from environment variables.
+    
+    Returns:
+        genai.GenerativeModel: Configured Generative AI model or None if API key is missing.
+    """
     api_key = os.getenv('GOOGLE_API_KEY')
     if (api_key):
         genai.configure(api_key=api_key)
@@ -23,9 +29,16 @@ def configure_genai():
 model = configure_genai()
 
 def info_extract(df, model):
-    """Extract information from a specified column in the DataFrame using a base prompt."""
+    """
+    Extract information from a specified column in the DataFrame using a base prompt.
+    
+    Args:
+        df (pd.DataFrame): The DataFrame containing the data.
+        model (genai.GenerativeModel): The configured Generative AI model.
+    """
     if df is not None:
         st.header("Information Extraction")
+        st.markdown("Use `{entity}` as a placeholder for the column values in your prompt.")
         prompt = st.text_input("Enter the base prompt for generating queries")
         column = st.selectbox("Select the column to extract information from", df.columns)
         
@@ -37,8 +50,18 @@ def info_extract(df, model):
             if prompt and column:
                 if model:
                     # Run the asynchronous extraction within a synchronous context
-                    results_df = asyncio.run(info_extract_all(prompt, df.head(100), column, model))
+                    with st.spinner('Extracting information...'):
+                        results_df = asyncio.run(info_extract_all(prompt, df.head(10), column, model))
                     st.dataframe(results_df)
+                    
+                    # Add button to download the extracted DataFrame
+                    csv = results_df.to_csv(index=False).encode('utf-8')
+                    st.download_button(
+                        label="Download Extracted Data as CSV",
+                        data=csv,
+                        file_name='extracted_data.csv',
+                        mime='text/csv',
+                    )
                 else:
                     st.warning("Generative AI model configuration failed due to missing API key.")
             else:
@@ -50,15 +73,22 @@ st.header("Upload CSV File or Provide Google Sheets URL")
 
 # Data Loading Function
 def load_data(file=None, google_sheet_url=None):
-    """Load data from a CSV file or Google Sheets URL."""
+    """
+    Load data from a CSV file or Google Sheets URL.
+    
+    Args:
+        file (UploadedFile): The uploaded CSV file.
+        google_sheet_url (str): The Google Sheets URL.
+    
+    Returns:
+        pd.DataFrame: DataFrame containing the loaded data or None if loading fails.
+    """
     try:
         if file:
             df = pd.read_csv(file)
-            st.success("CSV file uploaded successfully!")
             return df
         elif google_sheet_url:
             df = Load_DataFrame(google_sheet_url, Gsheet=True)
-            st.success("Google Sheets data loaded successfully!")
             return df
     except Exception as e:
         st.error(f"Error loading data: {e}")
@@ -73,5 +103,3 @@ df = load_data(file=file_upload, google_sheet_url=google_sheet_url)
 if df is not None:
     st.dataframe(df.head())
     info_extract(df, model)
-else:
-    st.info("Please upload a CSV file or enter a Google Sheets URL.")
