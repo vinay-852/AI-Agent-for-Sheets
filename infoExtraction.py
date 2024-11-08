@@ -31,8 +31,6 @@ def info_extraction(prompt, model):
     
     # Store results JSON and response in a DataFrame
     results_df = pd.DataFrame({
-        'Prompt': [result_json['prompt']],
-        'Web Results': [result_json['data']],
         'Response': [response.text]
     })
     

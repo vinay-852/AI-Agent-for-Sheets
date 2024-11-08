@@ -69,7 +69,7 @@ google_sheet_url = st.text_input("Or enter Google Sheets URL")
 # Data Loading and Display
 df = load_data(file=file_upload, google_sheet_url=google_sheet_url)
 if df is not None:
-    st.dataframe(df)
+    st.dataframe(df.head())
     info_extract(df, model)
 else:
     st.info("Please upload a CSV file or enter a Google Sheets URL.")

@@ -3,6 +3,7 @@ from duckduckgo_search import DDGS
 from langchain_community.document_loaders import SeleniumURLLoader
 import json
 import time
+import random
 
 def perform_duckduckgo_search(prompt: str, max_results: int = 2):
     """
@@ -43,8 +44,8 @@ def get_data_without_proxies(prompt: str, max_results: int = 2):
                 break
             except requests.exceptions.RequestException as e:
                 if i < retries - 1:
-                    wait_time = 2 ** i
-                    print(f"Rate limit hit. Retrying in {wait_time} seconds...")
+                    wait_time = (2 ** i) + random.uniform(0, 1)
+                    print(f"Rate limit hit. Retrying in {wait_time:.2f} seconds...")
                     time.sleep(wait_time)
                 else:
                     print("Max retries reached. Exiting.")
