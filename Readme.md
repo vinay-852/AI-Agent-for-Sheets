@@ -35,25 +35,25 @@ This project provides tools for extracting information from web searches and Goo
 
 1. **Upload a CSV file:**
     - Click on "Choose a CSV file" and select your CSV file.
-    ![Upload CSV](src/images/upload_csv.png)
+    
 
 2. **Provide a Google Sheets URL:**
     - Enter the Google Sheets URL in the provided text input.
-    ![Google Sheets URL](src/images/google_sheets_url.png)
+    
 
 ### Information Extraction
 
 1. **Enter the base prompt:**
     - Provide a base prompt for generating queries.
-    ![Enter Prompt](src/images/enter_prompt.png)
+    
 
 2. **Select the column:**
     - Choose the column from which you want to extract information.
-    ![Select Column](src/images/select_column.png)
+    
 
 3. **Extract Information:**
     - Click on "Extract Information" to start the extraction process.
-    ![Extract Information](src/images/extract_information.png)
+    
 
 **Note:** We can only extract data up to 100 rows from the input sheet after removing duplicates.
 
