@@ -1,6 +1,16 @@
 # AI Agent for Sheets
 
 This project provides tools for extracting information from web searches and Google Sheets using AI models.
+## Technologies Used
+
+- **Python**: Programming language used for the project.
+- **Streamlit**: Framework for building interactive web applications.
+- **Pandas**: Library for data manipulation and analysis.
+- **Selenium**: Tool for web scraping.
+- **Google Search**: API for performing web searches.
+- **LangChain**: Library for working with language models.
+- **Google Generative AI**: AI model used for information extraction.
+- **dotenv**: Library for loading environment variables from a `.env` file.
 
 ![Page1](src/images/1.png)
 ![Page2](src/images/2.png)
@@ -68,16 +78,7 @@ This project provides tools for extracting information from web searches and Goo
 
 This project uses the Generative AI model "gemini-1.5-flash" from Google for information extraction.
 
-## Technologies Used
 
-- **Python**: Programming language used for the project.
-- **Streamlit**: Framework for building interactive web applications.
-- **Pandas**: Library for data manipulation and analysis.
-- **Selenium**: Tool for web scraping.
-- **Google Search**: API for performing web searches.
-- **LangChain**: Library for working with language models.
-- **Google Generative AI**: AI model used for information extraction.
-- **dotenv**: Library for loading environment variables from a `.env` file.
 
 ## Input CSV file
 
