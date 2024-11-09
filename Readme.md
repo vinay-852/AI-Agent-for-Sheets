@@ -25,9 +25,6 @@ The primary objective of this project is to harness Google’s Generative AI mod
 - **Google Generative AI**: "Gemini-1.5-flash" model used for contextual information extraction.
 - **dotenv**: Manages environment variables securely.
 
-![App Screenshot - Page 1](src/images/1.png)
-![App Screenshot - Page 2](src/images/2.png)
-
 ## Setup Instructions
 
 To set up the project on your local environment, follow these steps:
@@ -51,6 +48,7 @@ Create a `.env` file in the root directory to store your Google API key.
 echo "GOOGLE_API_KEY=your_google_api_key_here" > .env
 ```
 
+
 ### 4. Launch the Streamlit App
 Start the web application using Streamlit.
 ```sh
@@ -64,14 +62,21 @@ Once the application is running, you can interact with the AI Agent for Sheets t
 ### Step 1: Upload Data Source
 Choose one of the following options to provide data to the application:
 
+
 - **Upload a CSV File**: Select and upload a CSV file by clicking on "Choose a CSV file."
 - **Enter a Google Sheets URL**: Paste a Google Sheets URL in the text input box.
+  <img width="934" alt="Screenshot 2024-11-09 at 11 29 48 AM" src="https://github.com/user-attachments/assets/d5470e1f-2847-4793-b89a-53ff24be1db9">
+  <img width="864" alt="Screenshot 2024-11-09 at 11 30 25 AM" src="https://github.com/user-attachments/assets/4b69bf84-3c0f-4503-8bcc-2f7d6e1b38cd">
 
 ### Step 2: Information Extraction
 
 1. **Enter a Base Prompt**: Enter a base prompt to guide the AI model in extracting relevant information.
+
 2. **Select a Column for Extraction**: Choose the column you wish to analyze or extract information from.
+
 3. **Click "Extract Information"**: Start the extraction process. The AI will retrieve relevant data for up to 100 unique rows.
+
+   <img width="797" alt="Screenshot 2024-11-09 at 11 31 24 AM" src="https://github.com/user-attachments/assets/d52abac3-22ba-4a5b-950b-d0c1bc8b9e3d">
 
 **Note**: The application limits extraction to a maximum of 100 unique rows from the data source.
 
