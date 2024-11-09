@@ -20,8 +20,7 @@ This project provides tools for extracting information from web searches and Goo
 
 3. **Create a `.env` file and add your Google API key:**
     ```sh
-    touch .env
-    echo "GOOGLE_API_KEY=your_google_api_key_here" >> .env
+    "GOOGLE_API_KEY=your_google_api_key_here"
     ```
 
 4. **Run the Streamlit app:**
