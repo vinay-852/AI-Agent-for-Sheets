@@ -1,94 +1,97 @@
 # AI Agent for Sheets
 
-This project provides tools for extracting information from web searches and Google Sheets using AI models.
+This project provides a powerful toolset for extracting, analyzing, and transforming data from web searches and Google Sheets through AI-driven techniques. Designed for researchers, analysts, and users who need rapid, relevant information processing, **AI Agent for Sheets** leverages cutting-edge AI and automation to streamline data handling.
+
+## Project Overview
+
+The primary objective of this project is to harness Google’s Generative AI model to enable precise and efficient information extraction. By integrating this AI with robust web scraping and data processing tools, users can rapidly obtain insights from diverse data sources, making it ideal for both quick data reviews and in-depth research.
+
+## Key Features
+
+- **AI-Powered Information Extraction**: Utilizing Google’s Generative AI model for meaningful and contextual data extraction.
+- **Seamless Integration with Google Sheets**: Direct access to data from Google Sheets and CSV uploads, allowing for flexibility in data sources.
+- **Web Search Integration**: Automated web search capability to gather information beyond the uploaded dataset.
+- **User-Friendly Web Interface**: Built on Streamlit, making the application interactive and accessible without coding experience.
+- **Flexible Data Processing Options**: Supports uploading CSV files or providing Google Sheets URLs to specify data sources.
+
 ## Technologies Used
 
-- **Python**: Programming language used for the project.
-- **Streamlit**: Framework for building interactive web applications.
-- **Pandas**: Library for data manipulation and analysis.
-- **Selenium**: Tool for web scraping.
-- **Google Search**: API for performing web searches.
-- **LangChain**: Library for working with language models.
-- **Google Generative AI**: AI model used for information extraction.
-- **dotenv**: Library for loading environment variables from a `.env` file.
+- **Python**: Core programming language.
+- **Streamlit**: Framework for developing an interactive web application.
+- **Pandas**: Essential library for data handling and manipulation.
+- **Selenium**: Automates web searches and gathers data.
+- **Google Search API**: Facilitates web search integration.
+- **LangChain**: Framework for AI model-based operations.
+- **Google Generative AI**: "Gemini-1.5-flash" model used for contextual information extraction.
+- **dotenv**: Manages environment variables securely.
 
-![Page1](src/images/1.png)
-![Page2](src/images/2.png)
+![App Screenshot - Page 1](src/images/1.png)
+![App Screenshot - Page 2](src/images/2.png)
 
-## Setup
+## Setup Instructions
 
-1. **Clone the repository:**
-    ```sh
-    git clone https://github.com/vinay-852/AI-Agent-for-Sheets.git
-    cd AI-Agent-for-Sheets
-    ```
+To set up the project on your local environment, follow these steps:
 
-2. **Install the required dependencies:**
-    ```sh
-    pip install -r requirements.txt
-    ```
+### 1. Clone the Repository
+Clone the project repository to your local machine and navigate into the directory.
+```sh
+git clone https://github.com/vinay-852/AI-Agent-for-Sheets.git
+cd AI-Agent-for-Sheets
+```
 
-3. **Create a `.env` file and add your Google API key:**
-    ```sh
-    "GOOGLE_API_KEY=your_google_api_key_here"
-    ```
+### 2. Install Dependencies
+Install all necessary Python packages using the requirements file.
+```sh
+pip install -r requirements.txt
+```
 
-4. **Run the Streamlit app:**
-    ```sh
-    streamlit run app.py
-    ```
+### 3. Configure Environment Variables
+Create a `.env` file in the root directory to store your Google API key.
+```sh
+echo "GOOGLE_API_KEY=your_google_api_key_here" > .env
+```
 
-## Usage
+### 4. Launch the Streamlit App
+Start the web application using Streamlit.
+```sh
+streamlit run app.py
+```
 
-### Upload CSV or Google Sheets URL
+## Usage Guide
 
-1. **Upload a CSV file:**
-    - Click on "Choose a CSV file" and select your CSV file.
-    
+Once the application is running, you can interact with the AI Agent for Sheets through a user-friendly interface.
 
-2. **Provide a Google Sheets URL:**
-    - Enter the Google Sheets URL in the provided text input.
-    
+### Step 1: Upload Data Source
+Choose one of the following options to provide data to the application:
 
-### Information Extraction
+- **Upload a CSV File**: Select and upload a CSV file by clicking on "Choose a CSV file."
+- **Enter a Google Sheets URL**: Paste a Google Sheets URL in the text input box.
 
-1. **Enter the base prompt:**
-    - Provide a base prompt for generating queries.
-    
+### Step 2: Information Extraction
 
-2. **Select the column:**
-    - Choose the column from which you want to extract information.
-    
+1. **Enter a Base Prompt**: Enter a base prompt to guide the AI model in extracting relevant information.
+2. **Select a Column for Extraction**: Choose the column you wish to analyze or extract information from.
+3. **Click "Extract Information"**: Start the extraction process. The AI will retrieve relevant data for up to 100 unique rows.
 
-3. **Extract Information:**
-    - Click on "Extract Information" to start the extraction process.
-    
+**Note**: The application limits extraction to a maximum of 100 unique rows from the data source.
 
-**Note:** We can only extract data up to 100 rows from the input sheet after removing duplicates.
+## Project Files
 
-## Files
-
-- `app.py`: Main Streamlit application.
-- `loadData.py`: Functions for loading data from CSV or Google Sheets.
-- `infoExtraction.py`: Functions for extracting information using AI models.
-- `infoExtractionOfAll.py`: Functions for extracting information from all rows in a DataFrame.
-- `webSearch.py`: Functions for performing web searches and retrieving data.
+- **`app.py`**: Main Streamlit application file.
+- **`loadData.py`**: Contains functions to load data from CSV or Google Sheets.
+- **`infoExtraction.py`**: Handles data extraction using the Google Generative AI model.
+- **`infoExtractionOfAll.py`**: Manages extraction of information from multiple rows in a DataFrame.
+- **`webSearch.py`**: Provides functions to perform web searches and retrieve data.
 
 ## AI Model
 
-This project uses the Generative AI model "gemini-1.5-flash" from Google for information extraction.
+This project utilizes Google’s **Generative AI model, "Gemini-1.5-flash,"** for high-quality information extraction, ensuring accurate and contextually relevant data insights.
 
+## Example Data and Output
 
-
-## Input CSV file
-
-The CSV file used in this Demo can be found [here](https://docs.google.com/spreadsheets/d/1GSbjXCk2y1vE_YhpmV6RF21DHOLqaJf3DHYjhsOCYD8/edit?gid=0#gid=0).
-
-## Output 
-
-[Output after extraction of required data](2024-11-08T16-19_export.csv)
+- **Sample Input**: [Input CSV file](https://docs.google.com/spreadsheets/d/1GSbjXCk2y1vE_YhpmV6RF21DHOLqaJf3DHYjhsOCYD8/edit?gid=0#gid=0).
+- **Sample Output**: [Generated Output CSV](2024-11-08T16-19_export.csv), displaying extracted information.
 
 ## License
 
-This project is licensed under the MIT License.
-
+This project is licensed under the **MIT License**. See the LICENSE file for more details.
