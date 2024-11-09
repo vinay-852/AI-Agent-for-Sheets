@@ -51,7 +51,7 @@ def info_extract(df, model):
                 if model:
                     # Run the asynchronous extraction within a synchronous context
                     with st.spinner('Extracting information...'):
-                        results_df = asyncio.run(info_extract_all(prompt, df.head(10), column, model))
+                        results_df = asyncio.run(info_extract_all(prompt, df.head(100), column, model))
                     st.dataframe(results_df)
                     
                     # Add button to download the extracted DataFrame
